@@ -1,0 +1,2 @@
+require './regalonenatalone'
+run RegaloneNatalone
