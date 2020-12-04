@@ -22,7 +22,6 @@ def randomPresentSelector(eljugador)
     end
     content_type :json
     ilfortunato.to_json
-
 end
 
 def getLuckyPerson(loschiindividui, eljugador)
