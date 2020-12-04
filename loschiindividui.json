@@ -1,1 +1,45 @@
-{"loschiindividui":[{"nome":"Houssine","tip":"","pic":""},{"nome":"Sara","tip":"","pic":""},{"nome":"Marko","tip":"","pic":""},{"nome":"Riccardo","tip":"","pic":""},{"nome":"Federica","tip":"","pic":""},{"nome":"Eros","tip":"","pic":""},{"nome":"Elisa","tip":"","pic":""}],"chosenones":[{"nome":"Syria","tip":"","pic":""}]}
+{
+    "loschiindividui": [
+        {
+            "nome": "Houssine",
+            "tip": "",
+            "pic": ""
+        },
+        {
+            "nome": "Sara",
+            "tip": "",
+            "pic": ""
+        },
+        {
+            "nome": "Marko",
+            "tip": "",
+            "pic": ""
+        },
+        {
+            "nome": "Riccardo",
+            "tip": "",
+            "pic": ""
+        },
+        {
+            "nome": "Syria",
+            "tip": "",
+            "pic": ""
+        },
+        {
+            "nome": "Federica",
+            "tip": "",
+            "pic": ""
+        },
+        {
+            "nome": "Eros",
+            "tip": "",
+            "pic": ""
+        },
+        {
+            "nome": "Elisa",
+            "tip": "",
+            "pic": ""  
+        }
+    ],
+    "chosenones": []
+}
