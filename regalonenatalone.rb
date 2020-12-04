@@ -9,32 +9,37 @@ class RegaloneNatalone < Sinatra::Base
 end
 
 def randomPresentSelector(eljugador)
-    #Lettura JSON e scrittura variabili persone disponibili o selezionate
     file = File.read('./loschiindividui.json')
     loschiindividui = JSON.parse(file)['loschiindividui']
-    chosenones = JSON.parse(file)['chosenones']
-    #Estrazione random di chi riceverà il regalo tra le persone disponibili
-    ilfortunato = loschiindividui[rand(loschiindividui.length())]
-    if (ilfortunato['nome'].downcase == eljugador.downcase)
-        tryAgain(eljugador)
+    primapartita = JSON.parse(file)['primapartita']
+    ilfortunato = {}
+    if (primapartita) 
+        loschiindividui = loschiindividui.shuffle
+        ilfortunato = getLuckyPerson(loschiindividui, eljugador)
+        updateJSONFile(file, loschiindividui)
     else
-        loschiindividui.delete(ilfortunato)
-        chosenones.push(ilfortunato)
-        #Riscrittura file JSON
-        updateJSONFile(file, loschiindividui, chosenones)
-        #Risposta persona selezionata
-        content_type :json
-        ilfortunato.to_json
+        ilfortunato = getLuckyPerson(loschiindividui, eljugador)
+    end
+    content_type :json
+    ilfortunato.to_json
+
+end
+
+def getLuckyPerson(loschiindividui, eljugador)
+    ilfortunato = loschiindividui.find {|s| s['nome'].downcase == eljugador.downcase}
+    indexfortunato = loschiindividui.index(ilfortunato)
+    if (indexfortunato == nil)
+        return { "error": "Hai inserito un utente non valido, deve essere un padres o una madres!" }
+    elsif ((indexfortunato + 1) == loschiindividui.length)
+        return loschiindividui[0]
+    else
+        return loschiindividui[indexfortunato + 1]
     end
 end
 
-def tryAgain(eljugador)
-    randomPresentSelector(eljugador)
-end
-
-def updateJSONFile(file, loschiindividui, chosenones)
+def updateJSONFile(file, loschiindividui)
     hash = JSON.load(file)
     hash['loschiindividui'] = loschiindividui
-    hash['chosenones'] = chosenones
+    hash['primapartita'] = false
     File.write('./loschiindividui.json', JSON.dump(hash))
 end
