@@ -2,6 +2,16 @@ require 'sinatra'
 require 'json'
 
 class RegaloneNatalone < Sinatra::Base
+    #CORS Preflight OPTION management to allow preflight requests from any origin
+    options "*" do
+        response.headers["Allow"] = "HEAD,GET,PUT,POST,DELETE,OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
+        200
+    end
+    #Allow CORS for http request
+    before do
+        response.headers["Access-Control-Allow-Origin"] = "*"
+    end
     get '/regalonenatalone' do
         eljugador = params['eljugador']
         randomPresentSelector(eljugador)
